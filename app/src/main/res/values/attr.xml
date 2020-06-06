@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BoardRow">
+        <attr name="row_number" format="integer" />
+        <attr name="active" format="boolean" />
+    </declare-styleable>
+</resources>

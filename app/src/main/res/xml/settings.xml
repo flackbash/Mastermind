@@ -1,0 +1,8 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="@string/settings_duplicate_colors_default"
+        android:key="@string/settings_duplicate_colors_key"
+        android:title="@string/settings_duplicate_colors_label"/>
+
+</PreferenceScreen>

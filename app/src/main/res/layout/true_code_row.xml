@@ -1,0 +1,70 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/row_number"
+            android:layout_height="wrap_content"
+            android:layout_width="@dimen/row_num_width"
+            android:padding="@dimen/margin_normal">
+        </TextView>
+
+        <GridLayout
+            android:id="@+id/background_hints_gl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:layout_toEndOf="@+id/row_number"
+            android:layout_toRightOf="@+id/row_number">
+
+            <ImageView
+                style="@style/target_hints"/>
+            <ImageView
+                style="@style/target_hints"/>
+
+        </GridLayout>
+
+        <LinearLayout
+            android:id="@+id/background_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_toEndOf="@id/background_hints_gl"
+            android:layout_toRightOf="@id/background_hints_gl">
+
+            <ImageView
+                style="@style/target_background"/>
+            <ImageView
+                style="@style/target_background"/>
+            <ImageView
+                style="@style/target_background"/>
+            <ImageView
+                style="@style/target_background"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/foreground_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_toEndOf="@id/background_hints_gl"
+            android:layout_toRightOf="@id/background_hints_gl">
+
+            <ImageView
+                style="@style/target_peg"/>
+            <ImageView
+                style="@style/target_peg"/>
+            <ImageView
+                style="@style/target_peg"/>
+            <ImageView
+                style="@style/target_peg"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</merge>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text sizes -->
+    <dimen name="text_size_small">12sp</dimen>
+
+    <!-- Paddings and Margins -->
+    <dimen name="margin_normal">4dp</dimen>
+    <dimen name="margin_small">2dp</dimen>
+
+    <!-- Object sizes -->
+    <dimen name="img_target_size">40dp</dimen>
+    <dimen name="img_hints_size">20dp</dimen>
+    <dimen name="row_num_width">28dp</dimen>
+</resources>

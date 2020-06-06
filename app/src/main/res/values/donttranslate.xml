@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings strings -->
+    <string name="settings_duplicate_colors_key">duplicate_colors</string>
+    <string name="settings_duplicate_colors_default">false</string>
+</resources>
