@@ -1,6 +1,8 @@
 # Mastermind
 *Pretty Android version of the Mastermind code-breaking game*
 
+<img src="https://github.com/flackbash/Mastermind/blob/master/metadata/android/en-US/phoneScreenshots/Game4-6.png" width="300" />
+
 ## License
 
     Copyright © 2020 Natalie Prange
