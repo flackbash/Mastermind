@@ -8,28 +8,89 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="target_background">
         <item name="android:layout_width">@dimen/img_target_size</item>
         <item name="android:layout_height">@dimen/img_target_size</item>
         <item name="android:layout_margin">@dimen/margin_normal</item>
         <item name="android:src">@drawable/target</item>
     </style>
+
+    <style name="target_background_small">
+        <item name="android:layout_width">@dimen/img_target_small_size</item>
+        <item name="android:layout_height">@dimen/img_target_small_size</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+        <item name="android:src">@drawable/target</item>
+    </style>
+
+    <style name="target_background_tiny">
+        <item name="android:layout_width">@dimen/img_target_tiny_size</item>
+        <item name="android:layout_height">@dimen/img_target_tiny_size</item>
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
+        <item name="android:src">@drawable/target</item>
+    </style>
+
+
+    <style name="target_peg">
+        <item name="android:layout_width">@dimen/img_target_size</item>
+        <item name="android:layout_height">@dimen/img_target_size</item>
+        <item name="android:layout_margin">@dimen/margin_normal</item>
+    </style>
+
+    <style name="target_peg_small">
+        <item name="android:layout_width">@dimen/img_target_small_size</item>
+        <item name="android:layout_height">@dimen/img_target_small_size</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+    </style>
+
+    <style name="target_peg_tiny">
+        <item name="android:layout_width">@dimen/img_target_tiny_size</item>
+        <item name="android:layout_height">@dimen/img_target_tiny_size</item>
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
+    </style>
+
+
     <style name="target_background_hints">
         <item name="android:layout_width">@dimen/img_hints_size</item>
         <item name="android:layout_height">@dimen/img_hints_size</item>
         <item name="android:layout_margin">@dimen/margin_small</item>
         <item name="android:src">@drawable/target</item>
     </style>
+
+    <style name="target_background_hints_small">
+        <item name="android:layout_width">@dimen/img_hints_small_size</item>
+        <item name="android:layout_height">@dimen/img_hints_small_size</item>
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
+        <item name="android:src">@drawable/target</item>
+    </style>
+
+    <style name="target_background_hints_tiny">
+        <item name="android:layout_width">@dimen/img_hints_tiny_size</item>
+        <item name="android:layout_height">@dimen/img_hints_tiny_size</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:src">@drawable/target</item>
+    </style>
+
+
     <style name="target_hints">
         <item name="android:layout_width">@dimen/img_hints_size</item>
         <item name="android:layout_height">@dimen/img_hints_size</item>
         <item name="android:layout_margin">@dimen/margin_small</item>
     </style>
-    <style name="target_peg">
-        <item name="android:layout_width">@dimen/img_target_size</item>
-        <item name="android:layout_height">@dimen/img_target_size</item>
-        <item name="android:layout_margin">@dimen/margin_normal</item>
+
+    <style name="target_hints_small">
+        <item name="android:layout_width">@dimen/img_hints_small_size</item>
+        <item name="android:layout_height">@dimen/img_hints_small_size</item>
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
     </style>
+
+    <style name="target_hints_tiny">
+        <item name="android:layout_width">@dimen/img_hints_tiny_size</item>
+        <item name="android:layout_height">@dimen/img_hints_tiny_size</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+
     <style name="peg_source">
         <item name="android:layout_width">@dimen/img_target_size</item>
         <item name="android:layout_height">0dp</item>
@@ -37,11 +98,33 @@
         <item name="android:layout_margin">@dimen/margin_normal</item>
     </style>
 
+    <style name="peg_source_small">
+        <item name="android:layout_width">@dimen/img_target_small_size</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+    </style>
+
+
     <style name="row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">@dimen/margin_normal</item>
+    </style>
+
+    <style name="row_small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/margin_small</item>
+    </style>
+
+    <style name="row_tiny">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/margin_tiny</item>
     </style>
 
 </resources>

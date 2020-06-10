@@ -9,6 +9,7 @@ import android.content.ClipDescription;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -33,49 +34,26 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     Peg mDraggedPeg;
     int mActiveRowIndex;
-    List<BoardRow> mBoardRowList = new ArrayList<>();
+    List<BoardRow> mBoardRowList;
     TrueCodeRow mTrueCodeRow;
     Game mGame;
     SharedPreferences mPreferences;
+    int mNumSlots;
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        // Initialize shared preferences
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mNumSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
+        setLayout(mNumSlots);
 
         // Set source peg views
-        ImageView pegBlueIV = findViewById(R.id.source_peg_blue);
-        ImageView pegVioletIV = findViewById(R.id.source_peg_violet);
-        ImageView pegRedIV = findViewById(R.id.source_peg_red);
-        ImageView pegOrangeIV = findViewById(R.id.source_peg_orange);
-        ImageView pegYellowIV = findViewById(R.id.source_peg_yellow);
-        ImageView pegGreenIV = findViewById(R.id.source_peg_green);
-        pegBlueIV.setTag("peg_blue");
-        pegVioletIV.setTag("peg_violet");
-        pegRedIV.setTag("peg_red");
-        pegOrangeIV.setTag("peg_orange");
-        pegYellowIV.setTag("peg_yellow");
-        pegGreenIV.setTag("peg_green");
-        pegBlueIV.setOnTouchListener(this);
-        pegVioletIV.setOnTouchListener(this);
-        pegRedIV.setOnTouchListener(this);
-        pegOrangeIV.setOnTouchListener(this);
-        pegYellowIV.setOnTouchListener(this);
-        pegGreenIV.setOnTouchListener(this);
+        initSourcePegs();
 
         // Set board rows
-        LinearLayout ll = findViewById(R.id.board_row_ll);
-        for (int i = 0; i < ll.getChildCount(); i++) {
-            View view = ll.getChildAt(i);
-            if (view.getId() == R.id.true_code_row) {
-                continue;
-            }
-            BoardRow br = (BoardRow) view;
-            br.setListener(this);
-            mBoardRowList.add(br);
-        }
-        Collections.reverse(mBoardRowList);
+        initBoardRowList();
 
         // Activate first row
         mActiveRowIndex = 0;
@@ -84,12 +62,18 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // Set true code row
         mTrueCodeRow = findViewById(R.id.true_code_row);
 
-        // Initialize shared preferences
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         // Initialize game
         boolean duplicateColors = mPreferences.getBoolean(getString(R.string.settings_duplicate_colors_key), Boolean.getBoolean(getString(R.string.settings_duplicate_colors_default)));
-        mGame = new Game(4, 6, duplicateColors);
+        mGame = new Game(mNumSlots, 6, duplicateColors);
+    }
+
+    @Override
+    protected void onRestart() {
+        int numSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
+        if (numSlots != mNumSlots) {
+            recreate();
+        }
+        super.onRestart();
     }
 
     @Override
@@ -171,6 +155,63 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
+    void setLayout(int numSlots) {
+        int boardLayout;
+        switch (numSlots) {
+            case 3:
+                boardLayout = R.layout.board_3;
+                break;
+            case 4:
+                boardLayout = R.layout.activity_main;
+                break;
+            case 5:
+                boardLayout = R.layout.board_5;
+                break;
+            case 6:
+            default:
+                boardLayout = R.layout.board_6;
+                break;
+        }
+        setContentView(boardLayout);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    void initSourcePegs() {
+        ImageView pegBlueIV = findViewById(R.id.source_peg_blue);
+        ImageView pegVioletIV = findViewById(R.id.source_peg_violet);
+        ImageView pegRedIV = findViewById(R.id.source_peg_red);
+        ImageView pegOrangeIV = findViewById(R.id.source_peg_orange);
+        ImageView pegYellowIV = findViewById(R.id.source_peg_yellow);
+        ImageView pegGreenIV = findViewById(R.id.source_peg_green);
+        pegBlueIV.setTag("peg_blue");
+        pegVioletIV.setTag("peg_violet");
+        pegRedIV.setTag("peg_red");
+        pegOrangeIV.setTag("peg_orange");
+        pegYellowIV.setTag("peg_yellow");
+        pegGreenIV.setTag("peg_green");
+        pegBlueIV.setOnTouchListener(this);
+        pegVioletIV.setOnTouchListener(this);
+        pegRedIV.setOnTouchListener(this);
+        pegOrangeIV.setOnTouchListener(this);
+        pegYellowIV.setOnTouchListener(this);
+        pegGreenIV.setOnTouchListener(this);
+    }
+
+    void initBoardRowList() {
+        mBoardRowList = new ArrayList<>();
+        LinearLayout ll = findViewById(R.id.board_row_ll);
+        for (int i = 0; i < ll.getChildCount(); i++) {
+            View view = ll.getChildAt(i);
+            if (view.getId() == R.id.true_code_row) {
+                continue;
+            }
+            BoardRow br = (BoardRow) view;
+            br.setListener(this);
+            mBoardRowList.add(br);
+        }
+        Collections.reverse(mBoardRowList);
+    }
+
     void restartGame() {
         // Reset board
         mTrueCodeRow.reset();
@@ -178,9 +219,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             br.reset();
         }
 
+        // Set new layout in case number of slots has changed
+        int numSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
+        if (numSlots != mNumSlots) {
+            mNumSlots = numSlots;
+            setLayout(mNumSlots);
+            initSourcePegs();
+            initBoardRowList();
+        }
+
         // Start new game
         boolean duplicateColors = mPreferences.getBoolean(getString(R.string.settings_duplicate_colors_key), Boolean.getBoolean(getString(R.string.settings_duplicate_colors_default)));
-        mGame = new Game(4, 6, duplicateColors);
+        mGame = new Game(mNumSlots, 6, duplicateColors);
+        Log.e("blabla", "game status: " + mGame.getStatus());
 
         // Set up new board
         mActiveRowIndex = 0;

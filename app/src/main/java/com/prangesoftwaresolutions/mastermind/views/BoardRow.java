@@ -37,16 +37,20 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     // Boolean indicating whether row is active
     private boolean mActive;
 
+    // Number of slots in the row
+    int mNumSlots = 4;
+
     // Pegs
     Peg mDraggedPeg;
-    Peg[] mPegArray = new Peg[4];
+    Peg[] mPegArray;
 
     // Listener for game status changes
     GameStatusEventListener mListener;
 
     public BoardRow(Context context) {
         super(context);
-        initializeViews(context);
+        initializeViews(context, mNumSlots);
+        mPegArray = new Peg[4];
     }
 
     public BoardRow(Context context, AttributeSet attrs) {
@@ -55,9 +59,12 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BoardRow);
         mRowNumber = typedArray.getInt(R.styleable.BoardRow_row_number, 0);
         mActive = typedArray.getBoolean(R.styleable.BoardRow_active, false);
+        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, 4);
         typedArray.recycle();
 
-        initializeViews(context);
+        mPegArray = new Peg[mNumSlots];
+
+        initializeViews(context, mNumSlots);
 
     }
 
@@ -67,18 +74,39 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BoardRow);
         mRowNumber = typedArray.getInt(R.styleable.BoardRow_row_number, 0);
         mActive = typedArray.getBoolean(R.styleable.BoardRow_active, false);
+        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, 4);
         typedArray.recycle();
 
-        initializeViews(context);
+        mPegArray = new Peg[mNumSlots];
+
+        initializeViews(context, mNumSlots);
     }
 
     /**
      * Inflates the views in the layout.
      */
-    private void initializeViews(Context context) {
+    private void initializeViews(Context context, int numSlots) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         assert inflater != null;
-        inflater.inflate(R.layout.board_row, this);
+        int boardRowLayout;
+        switch (numSlots) {
+            case 3:
+                boardRowLayout = R.layout.board_row_3;
+                break;
+            case 4:
+                boardRowLayout = R.layout.board_row_4;
+                break;
+            case 5:
+                boardRowLayout = R.layout.board_row_5;
+                break;
+            case 6:
+                boardRowLayout = R.layout.board_row_6;
+                break;
+            default:
+                boardRowLayout = R.layout.board_row_4;
+                break;
+        }
+        inflater.inflate(boardRowLayout, this);
     }
 
     @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
@@ -309,7 +337,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     public void reset() {
         // Reset variables
         setActive(false);
-        mPegArray = new Peg[4];
+        mPegArray = new Peg[mNumSlots];
 
         // Reset target views
         for (Pair<ImageView, ImageView> pair : mTargetList) {

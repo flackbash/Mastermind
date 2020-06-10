@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Settings strings -->
-    <string name="settings_duplicate_colors_key">duplicate_colors</string>
-    <string name="settings_duplicate_colors_default">false</string>
+    <string name="settings_duplicate_colors_key" translatable="false">duplicate_colors</string>
+    <string name="settings_duplicate_colors_default" translatable="false">false</string>
+
+    <string name="settings_number_slots_key" translatable="false">number_slots</string>
+    <string name="settings_number_slots_default" translatable="false">4</string>
 </resources>

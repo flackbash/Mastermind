@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:boardrow="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".activities.MainActivity"
+    android:baselineAligned="false"
+    android:background="@drawable/wood_background">
+
+    <LinearLayout
+        android:id="@+id/board_row_ll"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+        <com.prangesoftwaresolutions.mastermind.views.TrueCodeRow
+            android:id="@+id/true_code_row"
+            boardrow:slot_num="3"
+            style="@style/row"/>
+
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="10"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="9"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="8"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="7"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="6"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="5"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="4"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="3"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="2"
+            boardrow:slots="3"
+            style="@style/row" />
+        <com.prangesoftwaresolutions.mastermind.views.BoardRow
+            boardrow:row_number="1"
+            boardrow:slots="3"
+            style="@style/row" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_normal">
+
+        <ImageView
+            android:id="@+id/source_peg_blue"
+            style="@style/peg_source"
+            android:src="@drawable/peg_blue"/>
+        <ImageView
+            android:id="@+id/source_peg_violet"
+            style="@style/peg_source"
+            android:src="@drawable/peg_violet"/>
+        <ImageView
+            android:id="@+id/source_peg_red"
+            style="@style/peg_source"
+            android:src="@drawable/peg_red"/>
+        <ImageView
+            android:id="@+id/source_peg_orange"
+            style="@style/peg_source"
+            android:src="@drawable/peg_orange"/>
+        <ImageView
+            android:id="@+id/source_peg_yellow"
+            style="@style/peg_source"
+            android:src="@drawable/peg_yellow"/>
+        <ImageView
+            android:id="@+id/source_peg_green"
+            style="@style/peg_source"
+            android:src="@drawable/peg_green"/>
+
+    </LinearLayout>
+
+</LinearLayout>

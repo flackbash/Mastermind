@@ -3,5 +3,10 @@
     <declare-styleable name="BoardRow">
         <attr name="row_number" format="integer" />
         <attr name="active" format="boolean" />
+        <attr name="slots" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="TrueCodeRow">
+        <attr name="slot_num" format="integer" />
     </declare-styleable>
 </resources>
