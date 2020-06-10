@@ -24,8 +24,8 @@ public class TrueCodeRow extends RelativeLayout {
     // Number of slots
     int mNumSlots = 4;
 
-    // Target list
-    List<ImageView> mTargetList = new ArrayList<>();
+    // List of slot ImageViews
+    List<ImageView> mSlotIVList = new ArrayList<>();
 
     public TrueCodeRow(Context context) {
         super(context);
@@ -85,10 +85,10 @@ public class TrueCodeRow extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        LinearLayout foregroundLL = findViewById(R.id.foreground_ll);
+        LinearLayout foregroundLL = findViewById(R.id.slots_foreground_ll);
         for (int i = 0; i < foregroundLL.getChildCount(); i++) {
             ImageView foregroundIV = (ImageView) foregroundLL.getChildAt(i);
-            mTargetList.add(foregroundIV);
+            mSlotIVList.add(foregroundIV);
         }
     }
 
@@ -106,7 +106,7 @@ public class TrueCodeRow extends RelativeLayout {
         for (int i = 0; i < code.length; i++) {
             Color color = Color.valueOf(code[i]);
             Peg peg = new Peg(color, context);
-            mTargetList.get(i).setImageDrawable(peg.getDrawable());
+            mSlotIVList.get(i).setImageDrawable(peg.getDrawable());
         }
     }
 
@@ -118,7 +118,7 @@ public class TrueCodeRow extends RelativeLayout {
         show(false);
 
         // Reset views
-        for (ImageView iv : mTargetList) {
+        for (ImageView iv : mSlotIVList) {
             iv.setImageDrawable(null);
         }
     }

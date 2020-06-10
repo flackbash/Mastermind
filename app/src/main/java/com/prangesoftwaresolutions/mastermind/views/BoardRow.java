@@ -28,8 +28,8 @@ import java.util.List;
 
 public class BoardRow extends RelativeLayout implements View.OnDragListener, View.OnTouchListener {
 
-    // List of target pairs <backgroundIV, foregroundIV>
-    private List<Pair<ImageView, ImageView>> mTargetList = new ArrayList<>();
+    // List of slot ImageView pairs <backgroundIV, foregroundIV>
+    private List<Pair<ImageView, ImageView>> mSlotIVList = new ArrayList<>();
 
     // Row number
     private int mRowNumber;
@@ -42,7 +42,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
 
     // Pegs
     Peg mDraggedPeg;
-    Peg[] mPegArray;
+    Peg[] mSlotArray;
 
     // Listener for game status changes
     GameStatusEventListener mListener;
@@ -50,7 +50,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     public BoardRow(Context context) {
         super(context);
         initializeViews(context, mNumSlots);
-        mPegArray = new Peg[4];
+        mSlotArray = new Peg[4];
     }
 
     public BoardRow(Context context, AttributeSet attrs) {
@@ -62,7 +62,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
         mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, 4);
         typedArray.recycle();
 
-        mPegArray = new Peg[mNumSlots];
+        mSlotArray = new Peg[mNumSlots];
 
         initializeViews(context, mNumSlots);
 
@@ -77,7 +77,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
         mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, 4);
         typedArray.recycle();
 
-        mPegArray = new Peg[mNumSlots];
+        mSlotArray = new Peg[mNumSlots];
 
         initializeViews(context, mNumSlots);
     }
@@ -114,26 +114,26 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        // Set target background
-        LinearLayout backgroundLL = findViewById(R.id.background_ll);
-        LinearLayout foregroundLL = findViewById(R.id.foreground_ll);
+        // Set slot background
+        LinearLayout backgroundLL = findViewById(R.id.slots_background_ll);
+        LinearLayout foregroundLL = findViewById(R.id.slots_foreground_ll);
         for (int i = 0; i < backgroundLL.getChildCount(); i++) {
             // Set up background ImageView
             ImageView backgroundIV = (ImageView) backgroundLL.getChildAt(i);
-            backgroundIV.setTag("target_background_" + i);
+            backgroundIV.setTag("slot_background_" + i);
             backgroundIV.setOnDragListener(this);
 
             // Set up foreground ImageView
             ImageView foregroundIV = (ImageView) foregroundLL.getChildAt(i);
-            foregroundIV.setTag("target_" + i);
+            foregroundIV.setTag("slot_foreground_" + i);
             foregroundIV.setOnTouchListener(this);
 
-            // Add both ImageViews to target list
+            // Add both ImageViews to slot list
             Pair<ImageView, ImageView> pair = new Pair<>(backgroundIV, foregroundIV);
-            mTargetList.add(pair);
+            mSlotIVList.add(pair);
         }
 
-        // Highlight target backgrounds if row is active
+        // Highlight slot backgrounds if row is active
         if (mActive) {
             setBackgroundImages(true);
         }
@@ -166,25 +166,25 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     }
 
     /*
-     * Set background images of targets and hints in row depending on whether row is active.
+     * Set background images of slots and hints in row depending on whether row is active.
      */
     private void setBackgroundImages(boolean active) {
         int imageResource;
         if (active) {
-            imageResource = R.drawable.target_active;
+            imageResource = R.drawable.slot_active;
         } else {
-            imageResource = R.drawable.target;
+            imageResource = R.drawable.slot;
         }
 
-        // Set target background
-        LinearLayout ll = findViewById(R.id.background_ll);
+        // Set slot background
+        LinearLayout ll = findViewById(R.id.slots_background_ll);
         for (int i = 0; i < ll.getChildCount(); i++) {
             ImageView iv = (ImageView) ll.getChildAt(i);
             iv.setImageResource(imageResource);
         }
 
         // Set hint background
-        GridLayout gl = findViewById(R.id.background_hints_gl);
+        GridLayout gl = findViewById(R.id.hints_background_gl);
         for (int i = 0; i < gl.getChildCount(); i++) {
             ImageView iv = (ImageView) gl.getChildAt(i);
             iv.setImageResource(imageResource);
@@ -210,24 +210,24 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
                 return true;
 
             case DragEvent.ACTION_DROP:
-                // Get index of drop-target
+                // Get index of drop-target-slot
                 String tag = v.getTag().toString();
-                int targetIndex = Utils.getTargetIndex(tag);
+                int slotIndex = Utils.getSlotIndex(tag);
 
-                // Get drop target foreground image
-                ImageView target = mTargetList.get(targetIndex).second;
+                // Get drop-target-slot foreground image
+                ImageView targetSlot = mSlotIVList.get(slotIndex).second;
                 Drawable draggedDrawable = mDraggedPeg.getDrawable();
-                target.setImageDrawable(draggedDrawable);
+                targetSlot.setImageDrawable(draggedDrawable);
 
                 // Do not remove the draggedIV if it was a source peg or it is dropped at the spot
                 // from where it was dragged.
                 String draggedTag = mDraggedPeg.getImageView().getTag().toString();
-                if (draggedTag.startsWith("target") && Utils.getLastChar(tag) != Utils.getLastChar(draggedTag)) {
+                if (draggedTag.startsWith("slot") && Utils.getLastChar(tag) != Utils.getLastChar(draggedTag)) {
                     mDraggedPeg.getImageView().setImageDrawable(null);
                 }
 
-                mDraggedPeg.setImageView(target);
-                mPegArray[targetIndex] = mDraggedPeg;
+                mDraggedPeg.setImageView(targetSlot);
+                mSlotArray[slotIndex] = mDraggedPeg;
 
                 return true;
 
@@ -248,11 +248,11 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
                     mDraggedPeg.getImageView().setVisibility(View.VISIBLE);
                     mDraggedPeg.getImageView().setAlpha(1.0f);
 
-                    // If the drag was started from a target discard the peg
-                    if (mDraggedPeg.getImageView().getTag().toString().startsWith("target")) {
+                    // If the drag was started from a slot discard the peg
+                    if (mDraggedPeg.getImageView().getTag().toString().startsWith("slot")) {
                         mDraggedPeg.getImageView().setImageDrawable(null);
-                        targetIndex = Utils.getTargetIndex(mDraggedPeg.getImageView().getTag().toString());
-                        mPegArray[targetIndex] = null;
+                        slotIndex = Utils.getSlotIndex(mDraggedPeg.getImageView().getTag().toString());
+                        mSlotArray[slotIndex] = null;
                     }
                 }
 
@@ -268,7 +268,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            // Only allow drag if row is active and target contains a peg
+            // Only allow drag if row is active and slot contains a peg
             if (!mActive || ((ImageView) v).getDrawable() == null) {
                 return false;
             }
@@ -284,8 +284,8 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
             v.startDrag(dragData, myShadow, null, 0);
 
             // Get dragged Peg and update Peg Array
-            int targetIndex = Utils.getTargetIndex(v.getTag().toString());
-            Peg draggedPeg = mPegArray[targetIndex];
+            int slotIndex = Utils.getSlotIndex(v.getTag().toString());
+            Peg draggedPeg = mSlotArray[slotIndex];
             setDraggedPeg(draggedPeg);
 
             // Hide dragged peg in its origin ImageView
@@ -298,7 +298,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
      * Check if row is completely filled with pegs.
      */
     private boolean isRowComplete() {
-        for (Pair<ImageView, ImageView> pair : mTargetList) {
+        for (Pair<ImageView, ImageView> pair : mSlotIVList) {
             if (pair.second.getDrawable() == null)
                 return false;
         }
@@ -309,9 +309,9 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
      * Get current code from peg array.
      */
     public int[] getCode() {
-        int[] code = new int[mPegArray.length];
-        for (int i = 0; i < mPegArray.length; i++) {
-            code[i] = mPegArray[i].getColor().getValue();
+        int[] code = new int[mSlotArray.length];
+        for (int i = 0; i < mSlotArray.length; i++) {
+            code[i] = mSlotArray[i].getColor().getValue();
         }
         return code;
     }
@@ -320,7 +320,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
      * Display hints according to result.
      */
     public void showHints(List<Integer> result) {
-        GridLayout gl = findViewById(R.id.foreground_hints_gl);
+        GridLayout gl = findViewById(R.id.hints_foreground_gl);
         for (int i = 0; i < result.size(); i++) {
             ImageView iv = (ImageView) gl.getChildAt(i);
             if (result.get(i) == 2) {
@@ -337,15 +337,15 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     public void reset() {
         // Reset variables
         setActive(false);
-        mPegArray = new Peg[mNumSlots];
+        mSlotArray = new Peg[mNumSlots];
 
-        // Reset target views
-        for (Pair<ImageView, ImageView> pair : mTargetList) {
+        // Reset slot ImageViews
+        for (Pair<ImageView, ImageView> pair : mSlotIVList) {
             pair.second.setImageDrawable(null);
         }
 
-        // Reset hint views
-        GridLayout gl = findViewById(R.id.foreground_hints_gl);
+        // Reset hint ImageViews
+        GridLayout gl = findViewById(R.id.hints_foreground_gl);
         for (int i = 0; i < gl.getChildCount(); i++) {
             ImageView iv = (ImageView) gl.getChildAt(i);
             iv.setImageDrawable(null);

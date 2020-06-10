@@ -10,11 +10,11 @@
     <dimen name="margin_tiny">1dp</dimen>
 
     <!-- Object sizes -->
-    <dimen name="img_target_size">40dp</dimen>
-    <dimen name="img_target_small_size">36dp</dimen>
-    <dimen name="img_target_tiny_size">32dp</dimen>
-    <dimen name="img_hints_size">20dp</dimen>
-    <dimen name="img_hints_small_size">18dp</dimen>
-    <dimen name="img_hints_tiny_size">16dp</dimen>
+    <dimen name="img_slot_size">40dp</dimen>
+    <dimen name="img_slot_small_size">36dp</dimen>
+    <dimen name="img_slot_tiny_size">32dp</dimen>
+    <dimen name="img_hint_size">20dp</dimen>
+    <dimen name="img_hint_small_size">18dp</dimen>
+    <dimen name="img_hint_tiny_size">16dp</dimen>
     <dimen name="row_num_width">28dp</dimen>
 </resources>

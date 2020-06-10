@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 boardLayout = R.layout.board_3;
                 break;
             case 4:
-                boardLayout = R.layout.activity_main;
+                boardLayout = R.layout.board_4;
                 break;
             case 5:
                 boardLayout = R.layout.board_5;

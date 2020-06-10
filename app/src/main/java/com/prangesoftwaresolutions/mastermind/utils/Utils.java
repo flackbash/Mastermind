@@ -7,7 +7,7 @@ public class Utils {
         return string.charAt(string.length() - 1);
     }
 
-    public static int getTargetIndex(String tag) {
+    public static int getSlotIndex(String tag) {
         return Character.getNumericValue(getLastChar(tag));
     }
 

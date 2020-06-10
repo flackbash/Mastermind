@@ -18,7 +18,7 @@
         </TextView>
 
         <GridLayout
-            android:id="@+id/background_hints_gl"
+            android:id="@+id/hints_background_gl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -28,16 +28,16 @@
             android:layout_centerVertical="true">
 
             <ImageView
-                style="@style/target_background_hints"/>
+                style="@style/hint_background"/>
             <ImageView
-                style="@style/target_background_hints"/>
+                style="@style/hint_background"/>
             <ImageView
-                style="@style/target_background_hints"/>
+                style="@style/hint_background"/>
 
         </GridLayout>
 
         <GridLayout
-            android:id="@+id/foreground_hints_gl"
+            android:id="@+id/hints_foreground_gl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -47,48 +47,48 @@
             android:layout_centerVertical="true">
 
             <ImageView
-                style="@style/target_hints"/>
+                style="@style/hint_foreground"/>
             <ImageView
-                style="@style/target_hints"/>
+                style="@style/hint_foreground"/>
             <ImageView
-                style="@style/target_hints"/>
+                style="@style/hint_foreground"/>
 
         </GridLayout>
 
         <LinearLayout
-            android:id="@+id/background_ll"
+            android:id="@+id/slots_background_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_toEndOf="@id/background_hints_gl"
-            android:layout_toRightOf="@id/background_hints_gl">
+            android:layout_toEndOf="@id/hints_background_gl"
+            android:layout_toRightOf="@id/hints_background_gl">
 
             <ImageView
-                style="@style/target_background"/>
+                style="@style/slot_background"/>
             <ImageView
-                style="@style/target_background"/>
+                style="@style/slot_background"/>
             <ImageView
-                style="@style/target_background"/>
+                style="@style/slot_background"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/foreground_ll"
+            android:id="@+id/slots_foreground_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_toEndOf="@id/background_hints_gl"
-            android:layout_toRightOf="@id/background_hints_gl">
+            android:layout_toEndOf="@id/hints_background_gl"
+            android:layout_toRightOf="@id/hints_background_gl">
 
             <ImageView
-                style="@style/target_peg"/>
+                style="@style/slot_foreground"/>
             <ImageView
-                style="@style/target_peg"/>
+                style="@style/slot_foreground"/>
             <ImageView
-                style="@style/target_peg"/>
+                style="@style/slot_foreground"/>
 
         </LinearLayout>
     </RelativeLayout>

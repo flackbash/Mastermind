@@ -18,7 +18,7 @@
         </TextView>
 
         <GridLayout
-            android:id="@+id/background_hints_gl"
+            android:id="@+id/hints_background_gl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="3"
@@ -28,20 +28,20 @@
             android:layout_toRightOf="@+id/row_number">
 
             <ImageView
-                style="@style/target_background_hints_small"/>
+                style="@style/hint_background_small"/>
             <ImageView
-                style="@style/target_background_hints_small"/>
+                style="@style/hint_background_small"/>
             <ImageView
-                style="@style/target_background_hints_small"/>
+                style="@style/hint_background_small"/>
             <ImageView
-                style="@style/target_background_hints_small"/>
+                style="@style/hint_background_small"/>
             <ImageView
-                style="@style/target_background_hints_small"/>
+                style="@style/hint_background_small"/>
 
         </GridLayout>
 
         <GridLayout
-            android:id="@+id/foreground_hints_gl"
+            android:id="@+id/hints_foreground_gl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="3"
@@ -51,59 +51,59 @@
             android:layout_toRightOf="@+id/row_number">
 
             <ImageView
-                style="@style/target_hints_small"/>
+                style="@style/hint_foreground_small"/>
             <ImageView
-                style="@style/target_hints_small"/>
+                style="@style/hint_foreground_small"/>
             <ImageView
-                style="@style/target_hints_small"/>
+                style="@style/hint_foreground_small"/>
             <ImageView
-                style="@style/target_hints_small"/>
+                style="@style/hint_foreground_small"/>
             <ImageView
-                style="@style/target_hints_small"/>
+                style="@style/hint_foreground_small"/>
 
         </GridLayout>
 
         <LinearLayout
-            android:id="@+id/background_ll"
+            android:id="@+id/slots_background_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_toEndOf="@id/background_hints_gl"
-            android:layout_toRightOf="@id/background_hints_gl">
+            android:layout_toEndOf="@id/hints_background_gl"
+            android:layout_toRightOf="@id/hints_background_gl">
 
             <ImageView
-                style="@style/target_background_small"/>
+                style="@style/slot_background_small"/>
             <ImageView
-                style="@style/target_background_small"/>
+                style="@style/slot_background_small"/>
             <ImageView
-                style="@style/target_background_small"/>
+                style="@style/slot_background_small"/>
             <ImageView
-                style="@style/target_background_small"/>
+                style="@style/slot_background_small"/>
             <ImageView
-                style="@style/target_background_small"/>
+                style="@style/slot_background_small"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/foreground_ll"
+            android:id="@+id/slots_foreground_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_toEndOf="@id/background_hints_gl"
-            android:layout_toRightOf="@id/background_hints_gl">
+            android:layout_toEndOf="@id/hints_background_gl"
+            android:layout_toRightOf="@id/hints_background_gl">
 
             <ImageView
-                style="@style/target_peg_small"/>
+                style="@style/slot_foreground_small"/>
             <ImageView
-                style="@style/target_peg_small"/>
+                style="@style/slot_foreground_small"/>
             <ImageView
-                style="@style/target_peg_small"/>
+                style="@style/slot_foreground_small"/>
             <ImageView
-                style="@style/target_peg_small"/>
+                style="@style/slot_foreground_small"/>
             <ImageView
-                style="@style/target_peg_small"/>
+                style="@style/slot_foreground_small"/>
 
         </LinearLayout>
     </RelativeLayout>
