@@ -50,7 +50,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     public BoardRow(Context context) {
         super(context);
         initializeViews(context, mNumSlots);
-        mSlotArray = new Peg[4];
+        mSlotArray = new Peg[mNumSlots];
     }
 
     public BoardRow(Context context, AttributeSet attrs) {
@@ -59,7 +59,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BoardRow);
         mRowNumber = typedArray.getInt(R.styleable.BoardRow_row_number, 0);
         mActive = typedArray.getBoolean(R.styleable.BoardRow_active, false);
-        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, 4);
+        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, mNumSlots);
         typedArray.recycle();
 
         mSlotArray = new Peg[mNumSlots];
@@ -74,7 +74,7 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BoardRow);
         mRowNumber = typedArray.getInt(R.styleable.BoardRow_row_number, 0);
         mActive = typedArray.getBoolean(R.styleable.BoardRow_active, false);
-        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, 4);
+        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, mNumSlots);
         typedArray.recycle();
 
         mSlotArray = new Peg[mNumSlots];

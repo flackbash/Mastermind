@@ -36,7 +36,7 @@ public class TrueCodeRow extends RelativeLayout {
         super(context, attrs);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TrueCodeRow);
-        mNumSlots = typedArray.getInt(R.styleable.TrueCodeRow_slot_num, 4);
+        mNumSlots = typedArray.getInt(R.styleable.TrueCodeRow_num_slots, mNumSlots);
         typedArray.recycle();
 
         initializeViews(context, mNumSlots);
@@ -47,7 +47,7 @@ public class TrueCodeRow extends RelativeLayout {
         super(context, attrs, defStyle);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TrueCodeRow);
-        mNumSlots = typedArray.getInt(R.styleable.TrueCodeRow_slot_num, 4);
+        mNumSlots = typedArray.getInt(R.styleable.TrueCodeRow_num_slots, mNumSlots);
         typedArray.recycle();
 
         initializeViews(context, mNumSlots);

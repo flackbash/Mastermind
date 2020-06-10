@@ -9,7 +9,10 @@ public enum Color {
     RED(2),
     ORANGE(3),
     YELLOW(4),
-    GREEN(5);
+    GREEN(5),
+    TURQUOISE(6),
+    LIGHT_BLUE(7),
+    PURPLE(8);
 
     private int value;
     private static Map<Integer, Color> map = new HashMap<>();

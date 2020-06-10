@@ -6,11 +6,18 @@
         android:title="@string/settings_duplicate_colors_label"/>
 
     <ListPreference
-        android:defaultValue="4"
+        android:defaultValue="@string/settings_number_slots_default"
         android:key="@string/settings_number_slots_key"
         android:title="@string/settings_number_slots_label"
         android:entries="@array/slotNumArray"
         android:entryValues="@array/slotNumArray"
         android:summary="@string/settings_number_slots_summary" />
+
+    <ListPreference
+        android:defaultValue="@string/settings_number_colors_default"
+        android:key="@string/settings_number_colors_key"
+        android:title="@string/settings_number_colors_label"
+        android:entries="@array/colorNumArray"
+        android:entryValues="@array/colorNumArray"/>
 
 </PreferenceScreen>

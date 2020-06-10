@@ -6,4 +6,7 @@
 
     <string name="settings_number_slots_key" translatable="false">number_slots</string>
     <string name="settings_number_slots_default" translatable="false">4</string>
+
+    <string name="settings_number_colors_key" translatable="false">number_colors</string>
+    <string name="settings_number_colors_default" translatable="false">6</string>
 </resources>

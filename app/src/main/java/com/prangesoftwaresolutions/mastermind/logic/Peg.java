@@ -49,6 +49,15 @@ public class Peg {
             case GREEN:
                 drawable =  mContext.getResources().getDrawable(R.drawable.peg_green);
                 break;
+            case TURQUOISE:
+                drawable =  mContext.getResources().getDrawable(R.drawable.peg_turquoise);
+                break;
+            case LIGHT_BLUE:
+                drawable =  mContext.getResources().getDrawable(R.drawable.peg_light_blue);
+                break;
+            case PURPLE:
+                drawable =  mContext.getResources().getDrawable(R.drawable.peg_purple);
+                break;
             default:
                 drawable = null;
         }
@@ -61,23 +70,32 @@ public class Peg {
     private static Color getColor(String string) {
         Color color;
         switch (string) {
-            case "peg_blue":
+            case "source_peg_0":
                 color = Color.BLUE;
                 break;
-            case "peg_violet":
+            case "source_peg_1":
                 color = Color.VIOLET;
                 break;
-            case "peg_red":
+            case "source_peg_2":
                 color = Color.RED;
                 break;
-            case "peg_orange":
+            case "source_peg_3":
                 color = Color.ORANGE;
                 break;
-            case "peg_yellow":
+            case "source_peg_4":
                 color = Color.YELLOW;
                 break;
-            case "peg_green":
+            case "source_peg_5":
                 color = Color.GREEN;
+                break;
+            case "source_peg_6":
+                color = Color.TURQUOISE;
+                break;
+            case "source_peg_7":
+                color = Color.LIGHT_BLUE;
+                break;
+            case "source_peg_8":
+                color = Color.PURPLE;
                 break;
             default:
                 color = null;

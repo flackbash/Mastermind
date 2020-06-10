@@ -9,4 +9,9 @@
     <string name="settings_duplicate_colors_label">Allow duplicate colors</string>
     <string name="settings_number_slots_label">Code length</string>
     <string name="settings_number_slots_summary">Length of the code you are trying to break</string>
+    <string name="settings_number_colors_label">Number of colors</string>
+
+    <!-- toast strings -->
+    <string name="warning_duplicate_colors_enabled">If the code length is greater than the number of colors, duplicate colors need to be enabled.</string>
+
 </resources>

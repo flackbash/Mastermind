@@ -19,7 +19,7 @@
 
         <com.prangesoftwaresolutions.mastermind.views.TrueCodeRow
             android:id="@+id/true_code_row"
-            boardrow:slot_num="6"
+            boardrow:num_slots="6"
             style="@style/row_tiny"/>
 
         <com.prangesoftwaresolutions.mastermind.views.BoardRow
@@ -81,37 +81,14 @@
 
     </LinearLayout>
 
+    <!--
+    <com.prangesoftwaresolutions.mastermind.views.SourcePegs
+        android:id="@+id/source_pegs"
+        style="@style/source_pegs"/>
+        -->
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/margin_normal">
-
-        <ImageView
-            android:id="@+id/source_peg_blue"
-            style="@style/peg_source_small"
-            android:src="@drawable/peg_blue"/>
-        <ImageView
-            android:id="@+id/source_peg_violet"
-            style="@style/peg_source_small"
-            android:src="@drawable/peg_violet"/>
-        <ImageView
-            android:id="@+id/source_peg_red"
-            style="@style/peg_source_small"
-            android:src="@drawable/peg_red"/>
-        <ImageView
-            android:id="@+id/source_peg_orange"
-            style="@style/peg_source_small"
-            android:src="@drawable/peg_orange"/>
-        <ImageView
-            android:id="@+id/source_peg_yellow"
-            style="@style/peg_source_small"
-            android:src="@drawable/peg_yellow"/>
-        <ImageView
-            android:id="@+id/source_peg_green"
-            style="@style/peg_source_small"
-            android:src="@drawable/peg_green"/>
+        android:id="@+id/source_pegs_ll"
+        style="@style/source_pegs">
 
     </LinearLayout>
 

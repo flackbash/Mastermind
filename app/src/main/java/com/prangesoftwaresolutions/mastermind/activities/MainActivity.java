@@ -9,7 +9,6 @@ import android.content.ClipDescription;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -23,6 +22,7 @@ import com.prangesoftwaresolutions.mastermind.logic.Game;
 import com.prangesoftwaresolutions.mastermind.logic.Peg;
 import com.prangesoftwaresolutions.mastermind.utils.Utils;
 import com.prangesoftwaresolutions.mastermind.views.BoardRow;
+import com.prangesoftwaresolutions.mastermind.views.SourcePegs;
 import com.prangesoftwaresolutions.mastermind.views.TrueCodeRow;
 
 import java.util.ArrayList;
@@ -32,13 +32,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener, GameStatusEventListener {
 
-    Peg mDraggedPeg;
     int mActiveRowIndex;
     List<BoardRow> mBoardRowList;
     TrueCodeRow mTrueCodeRow;
     Game mGame;
     SharedPreferences mPreferences;
     int mNumSlots;
+    int mNumColors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // Initialize shared preferences
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mNumSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
+        mNumColors = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_colors_key), getString(R.string.settings_number_colors_default)));
         setLayout(mNumSlots);
 
         // Set source peg views
-        initSourcePegs();
+        initSourcePegs(mNumColors);
 
         // Set board rows
         initBoardRowList();
@@ -64,13 +65,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         // Initialize game
         boolean duplicateColors = mPreferences.getBoolean(getString(R.string.settings_duplicate_colors_key), Boolean.getBoolean(getString(R.string.settings_duplicate_colors_default)));
-        mGame = new Game(mNumSlots, 6, duplicateColors);
+        mGame = new Game(mNumSlots, mNumColors, duplicateColors);
     }
 
     @Override
     protected void onRestart() {
         int numSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
-        if (numSlots != mNumSlots) {
+        int numColors = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_colors_key), getString(R.string.settings_number_colors_default)));
+        if (numSlots != mNumSlots || numColors != mNumColors) {
             recreate();
         }
         super.onRestart();
@@ -115,10 +117,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
                 // Start the drag
                 v.startDrag(dragData, myShadow, null, 0);
-                mDraggedPeg = new Peg(v.getTag().toString(), this);
-                mDraggedPeg.setImageView((ImageView) v);
-                mBoardRowList.get(mActiveRowIndex).setDraggedPeg(mDraggedPeg);
-                mDraggedPeg.getImageView().setAlpha(0.7f);
+                Peg draggedPeg = new Peg(v.getTag().toString(), this);
+                draggedPeg.setImageView((ImageView) v);
+                mBoardRowList.get(mActiveRowIndex).setDraggedPeg(draggedPeg);
+                draggedPeg.getImageView().setAlpha(0.7f);
 
                 break;
             case MotionEvent.ACTION_UP:
@@ -176,25 +178,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    void initSourcePegs() {
-        ImageView pegBlueIV = findViewById(R.id.source_peg_blue);
-        ImageView pegVioletIV = findViewById(R.id.source_peg_violet);
-        ImageView pegRedIV = findViewById(R.id.source_peg_red);
-        ImageView pegOrangeIV = findViewById(R.id.source_peg_orange);
-        ImageView pegYellowIV = findViewById(R.id.source_peg_yellow);
-        ImageView pegGreenIV = findViewById(R.id.source_peg_green);
-        pegBlueIV.setTag("peg_blue");
-        pegVioletIV.setTag("peg_violet");
-        pegRedIV.setTag("peg_red");
-        pegOrangeIV.setTag("peg_orange");
-        pegYellowIV.setTag("peg_yellow");
-        pegGreenIV.setTag("peg_green");
-        pegBlueIV.setOnTouchListener(this);
-        pegVioletIV.setOnTouchListener(this);
-        pegRedIV.setOnTouchListener(this);
-        pegOrangeIV.setOnTouchListener(this);
-        pegYellowIV.setOnTouchListener(this);
-        pegGreenIV.setOnTouchListener(this);
+    void initSourcePegs(int numColors) {
+        LinearLayout sourcePegsLL = findViewById(R.id.source_pegs_ll);
+        sourcePegsLL.removeAllViews();
+        SourcePegs sourcePegs = new SourcePegs(this);
+        sourcePegs.setNumPegsAndInflate(this, numColors);
+        sourcePegs.setOnTouchListener(this);
+        sourcePegsLL.addView(sourcePegs);
     }
 
     void initBoardRowList() {
@@ -221,17 +211,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         // Set new layout in case number of slots has changed
         int numSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
-        if (numSlots != mNumSlots) {
+        int numColors = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_colors_key), getString(R.string.settings_number_colors_default)));
+
+        if (numSlots != mNumSlots || numColors != mNumColors) {
             mNumSlots = numSlots;
+            mNumColors = numColors;
             setLayout(mNumSlots);
-            initSourcePegs();
+            initSourcePegs(mNumColors);
             initBoardRowList();
         }
 
         // Start new game
         boolean duplicateColors = mPreferences.getBoolean(getString(R.string.settings_duplicate_colors_key), Boolean.getBoolean(getString(R.string.settings_duplicate_colors_default)));
-        mGame = new Game(mNumSlots, 6, duplicateColors);
-        Log.e("blabla", "game status: " + mGame.getStatus());
+        mGame = new Game(mNumSlots, mNumColors, duplicateColors);
 
         // Set up new board
         mActiveRowIndex = 0;
