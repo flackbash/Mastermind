@@ -9,8 +9,4 @@
     <declare-styleable name="TrueCodeRow">
         <attr name="num_slots" format="integer" />
     </declare-styleable>
-
-    <declare-styleable name="SourcePegs">
-        <attr name="num_pegs" format="integer" />
-    </declare-styleable>
 </resources>

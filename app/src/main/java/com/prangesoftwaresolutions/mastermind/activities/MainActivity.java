@@ -3,7 +3,6 @@ package com.prangesoftwaresolutions.mastermind.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
@@ -32,13 +31,19 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener, GameStatusEventListener {
 
-    int mActiveRowIndex;
+    // View related variables
     List<BoardRow> mBoardRowList;
     TrueCodeRow mTrueCodeRow;
+    SourcePegs mSourcePegs;
+    int mActiveRowIndex;
+
+    // Game logic variables
     Game mGame;
-    SharedPreferences mPreferences;
     int mNumSlots;
     int mNumColors;
+
+    // Preferences
+    SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setLayout(mNumSlots);
 
         // Set source peg views
-        initSourcePegs(mNumColors);
+        mSourcePegs = findViewById(R.id.source_pegs);
+        mSourcePegs.setPegs(this, mNumColors);
 
         // Set board rows
         initBoardRowList();
@@ -177,16 +183,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(boardLayout);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    void initSourcePegs(int numColors) {
-        LinearLayout sourcePegsLL = findViewById(R.id.source_pegs_ll);
-        sourcePegsLL.removeAllViews();
-        SourcePegs sourcePegs = new SourcePegs(this);
-        sourcePegs.setNumPegsAndInflate(this, numColors);
-        sourcePegs.setOnTouchListener(this);
-        sourcePegsLL.addView(sourcePegs);
-    }
-
     void initBoardRowList() {
         mBoardRowList = new ArrayList<>();
         LinearLayout ll = findViewById(R.id.board_row_ll);
@@ -217,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             mNumSlots = numSlots;
             mNumColors = numColors;
             setLayout(mNumSlots);
-            initSourcePegs(mNumColors);
+            mSourcePegs.setPegs(this, mNumColors);
             initBoardRowList();
         }
 

@@ -11,57 +11,15 @@ public class Peg {
     private ImageView mImageView;
     private ImageView mLastImageView;
     private Drawable mDrawable;
-    private Context mContext;
 
     public Peg(Color color, Context context) {
         mColor = color;
-        mContext = context;
-        mDrawable = getDrawable(mColor);
+        mDrawable = getDrawable(context, mColor);
     }
 
     public Peg(String string, Context context) {
         mColor = getColor(string);
-        mContext = context;
-        mDrawable = getDrawable(mColor);
-    }
-
-    /*
-     * Get Peg drawable resource from color
-     */
-    private Drawable getDrawable(Color color) {
-        Drawable drawable;
-        switch (color) {
-            case BLUE:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_blue);
-                break;
-            case VIOLET:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_violet);
-                break;
-            case RED:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_red);
-                break;
-            case ORANGE:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_orange);
-                break;
-            case YELLOW:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_yellow);
-                break;
-            case GREEN:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_green);
-                break;
-            case TURQUOISE:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_turquoise);
-                break;
-            case LIGHT_BLUE:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_light_blue);
-                break;
-            case PURPLE:
-                drawable =  mContext.getResources().getDrawable(R.drawable.peg_purple);
-                break;
-            default:
-                drawable = null;
-        }
-        return drawable;
+        mDrawable = getDrawable(context, mColor);
     }
 
     /*
@@ -101,6 +59,45 @@ public class Peg {
                 color = null;
         }
         return color;
+    }
+
+    /*
+     * Get Peg drawable resource from color
+     */
+    public static Drawable getDrawable(Context context, Color color) {
+        Drawable drawable;
+        switch (color) {
+            case BLUE:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_blue);
+                break;
+            case VIOLET:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_violet);
+                break;
+            case RED:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_red);
+                break;
+            case ORANGE:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_orange);
+                break;
+            case YELLOW:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_yellow);
+                break;
+            case GREEN:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_green);
+                break;
+            case TURQUOISE:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_turquoise);
+                break;
+            case LIGHT_BLUE:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_light_blue);
+                break;
+            case PURPLE:
+                drawable =  context.getResources().getDrawable(R.drawable.peg_purple);
+                break;
+            default:
+                drawable = null;
+        }
+        return drawable;
     }
 
     public void clearLastImageView() {

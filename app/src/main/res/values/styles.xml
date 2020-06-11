@@ -91,21 +91,6 @@
     </style>
 
 
-    <style name="peg_source">
-        <item name="android:layout_width">@dimen/img_slot_size</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">@dimen/margin_normal</item>
-    </style>
-
-    <style name="peg_source_small">
-        <item name="android:layout_width">@dimen/img_slot_small_size</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">@dimen/margin_small</item>
-    </style>
-
-
     <style name="row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>

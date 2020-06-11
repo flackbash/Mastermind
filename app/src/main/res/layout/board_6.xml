@@ -81,15 +81,9 @@
 
     </LinearLayout>
 
-    <!--
     <com.prangesoftwaresolutions.mastermind.views.SourcePegs
         android:id="@+id/source_pegs"
-        style="@style/source_pegs"/>
-        -->
-    <LinearLayout
-        android:id="@+id/source_pegs_ll"
         style="@style/source_pegs">
-
-    </LinearLayout>
+    </com.prangesoftwaresolutions.mastermind.views.SourcePegs>
 
 </LinearLayout>
