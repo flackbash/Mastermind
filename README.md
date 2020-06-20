@@ -16,7 +16,10 @@ The game is lost if you use up all rows without guessing the correct code.
 
 ## Screenshots
 
-<img src="https://github.com/flackbash/Mastermind/blob/master/metadata/android/en-US/phoneScreenshots/Game4-6.png" width="300" />
+<pre>
+<img src="https://github.com/flackbash/Mastermind/blob/master/metadata/android/en-US/phoneScreenshots/01Game4-6.png" height="400"/>    <img src="https://github.com/flackbash/Mastermind/blob/master/metadata/android/en-US/phoneScreenshots/10Game5-9.png" height="400"/>    <img src="https://github.com/flackbash/Mastermind/blob/master/metadata/android/en-US/phoneScreenshots/30Settings.png" height="400"/>
+</pre>
+
 
 ## License
 
