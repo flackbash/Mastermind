@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Layout Texts -->
+    <string name="about_text" translatable="false">%s %s</string>
+    <string name="copyright" translatable="false">Copyright © 2020 Natalie Prange</string>
+    <string name="github_link" translatable="false">https://github.com/flackbash/Mastermind</string>
+
     <!-- Settings strings -->
     <string name="settings_duplicate_colors_key" translatable="false">duplicate_colors</string>
     <string name="settings_duplicate_colors_default" translatable="false">false</string>
@@ -12,4 +17,5 @@
 
     <string name="settings_number_rows_key" translatable="false">number_rows</string>
     <string name="settings_number_rows_default" translatable="false">-1</string>
+
 </resources>

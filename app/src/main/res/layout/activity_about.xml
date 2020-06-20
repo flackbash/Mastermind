@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="@dimen/img_about_icon_size"
+        android:layout_height="@dimen/img_about_icon_size"
+        android:layout_margin="@dimen/margin_big"
+        android:src="@drawable/mastermind_icon" />
+
+    <TextView
+        android:id="@+id/about_text_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_big"
+        android:padding="@dimen/margin_large" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:paddingEnd="@dimen/margin_large"
+        android:paddingStart="@dimen/margin_large"
+        android:text="@string/about_github_text1"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:autoLink="all"
+        android:textColorLink="@color/colorPrimaryDark"
+        android:linksClickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:paddingEnd="@dimen/margin_big"
+        android:paddingStart="@dimen/margin_big"
+        android:paddingBottom="@dimen/margin_big"
+        android:text="@string/github_link"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:paddingEnd="@dimen/margin_large"
+        android:paddingStart="@dimen/margin_large"
+        android:text="@string/about_github_text2"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingStart="@dimen/margin_big"
+        android:paddingEnd="@dimen/margin_big"
+        android:paddingBottom="@dimen/margin_big"
+        android:text="@string/copyright" />
+</LinearLayout>

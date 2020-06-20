@@ -3,8 +3,11 @@
 
     <!-- Text sizes -->
     <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_big">20sp</dimen>
 
     <!-- Paddings and Margins -->
+    <dimen name="margin_large">56dp</dimen>
+    <dimen name="margin_big">8dp</dimen>
     <dimen name="margin_normal">4dp</dimen>
     <dimen name="margin_small">2dp</dimen>
     <dimen name="margin_tiny">1dp</dimen>
@@ -17,4 +20,6 @@
     <dimen name="img_hint_small_size">18dp</dimen>
     <dimen name="img_hint_tiny_size">16dp</dimen>
     <dimen name="row_num_width">28dp</dimen>
+    <dimen name="img_about_icon_size">160dp</dimen>
+
 </resources>

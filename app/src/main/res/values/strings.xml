@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Mastermind</string>
 
+    <!-- Layout Texts -->
+    <string name="about_github_text1">Visit</string>
+    <string name="about_github_text2">to report bugs, contribute or leave a star if you like the app.</string>
+
     <!-- menu strings -->
     <string name="new_game">New game</string>
     <string name="settings">Settings</string>
+    <string name="about">About</string>
 
     <!-- settings strings -->
     <string name="settings_duplicate_colors_label">Allow duplicate colors</string>

@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activities.AboutActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.prangesoftwaresolutions.mastermind.activities.MainActivity" />
+        </activity>
+        <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>

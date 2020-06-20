@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsIntent);
                 return true;
+            case R.id.menu_about:
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
+                return true;
         }
 
         return (super.onOptionsItemSelected(item));
