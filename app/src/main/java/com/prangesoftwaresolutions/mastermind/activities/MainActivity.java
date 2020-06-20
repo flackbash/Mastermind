@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Game mGame;
     int mNumSlots;
     int mNumColors;
+    int mNumRows;
 
     // Preferences
     SharedPreferences mPreferences;
@@ -46,10 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mNumSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
         mNumColors = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_colors_key), getString(R.string.settings_number_colors_default)));
+        mNumRows = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_rows_key), getString(R.string.settings_number_rows_default)));
 
         // Initialize board
         mBoard = findViewById(R.id.board);
-        mBoard.initializeBoard(this, mNumSlots, mNumColors);
+        mBoard.initializeBoard(this, mNumSlots, mNumColors, mNumRows);
 
         // Initialize game
         boolean duplicateColors = mPreferences.getBoolean(getString(R.string.settings_duplicate_colors_key), Boolean.getBoolean(getString(R.string.settings_duplicate_colors_default)));
@@ -60,7 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onRestart() {
         int numSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
         int numColors = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_colors_key), getString(R.string.settings_number_colors_default)));
-        if (numSlots != mNumSlots || numColors != mNumColors) {
+        int numRows = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_rows_key), getString(R.string.settings_number_rows_default)));
+
+        if (numSlots != mNumSlots || numColors != mNumColors || numRows != mNumRows) {
             recreate();
         }
         super.onRestart();
@@ -145,13 +149,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     void restartGame() {
-        // Re-initialize board in case number of pegs or colors has changed
+        // Re-initialize board in case number of pegs, colors or rows has changed
         int numSlots = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_slots_key), getString(R.string.settings_number_slots_default)));
         int numColors = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_colors_key), getString(R.string.settings_number_colors_default)));
-        if (numSlots != mNumSlots || numColors != mNumColors) {
+        int numRows = Integer.parseInt(mPreferences.getString(getString(R.string.settings_number_rows_key), getString(R.string.settings_number_rows_default)));
+        if (numSlots != mNumSlots || numColors != mNumColors || numRows != mNumRows) {
             mNumSlots = numSlots;
             mNumColors = numColors;
-            mBoard.initializeBoard(this, mNumSlots, mNumColors);
+            mBoard.initializeBoard(this, mNumSlots, mNumColors, mNumRows);
         } else {
             mBoard.resetBoard();
         }

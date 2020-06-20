@@ -9,15 +9,22 @@
         android:defaultValue="@string/settings_number_slots_default"
         android:key="@string/settings_number_slots_key"
         android:title="@string/settings_number_slots_label"
-        android:entries="@array/slotNumArray"
-        android:entryValues="@array/slotNumArray"
+        android:entries="@array/numberSlotsArray"
+        android:entryValues="@array/numberSlotsArray"
         android:summary="@string/settings_number_slots_summary" />
 
     <ListPreference
         android:defaultValue="@string/settings_number_colors_default"
         android:key="@string/settings_number_colors_key"
         android:title="@string/settings_number_colors_label"
-        android:entries="@array/colorNumArray"
-        android:entryValues="@array/colorNumArray"/>
+        android:entries="@array/numberColorsArray"
+        android:entryValues="@array/numberColorsArray"/>
+
+    <ListPreference
+        android:defaultValue="@string/settings_number_rows_default"
+        android:key="@string/settings_number_rows_key"
+        android:title="@string/settings_number_rows_label"
+        android:entries="@array/numberRowsLabelsArray"
+        android:entryValues="@array/numberRowsValuesArray"/>
 
 </PreferenceScreen>

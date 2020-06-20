@@ -50,9 +50,11 @@ public class Board extends LinearLayout {
      * Initialize the board by determining the number of rows, initializing the CodeRows
      * accordingly as well as the source pegs
      */
-    public void initializeBoard(Context context, int numPegs, int numColors) {
-        // Determine how many rows are needed
-        int numRows = getNumRows(numPegs, numColors);
+    public void initializeBoard(Context context, int numPegs, int numColors, int numRows) {
+        if (numRows < 0) {
+            // Determine how many rows are needed
+            numRows = getNumRows(numPegs, numColors);
+        }
 
         LinearLayout codeRowLL = findViewById(R.id.board_row_ll);
 

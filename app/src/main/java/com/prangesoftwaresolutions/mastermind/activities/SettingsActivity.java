@@ -113,7 +113,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         private void updateSummary(Preference pref) {
             if (pref instanceof ListPreference) {
-                pref.setSummary(((ListPreference)pref).getValue());
+                pref.setSummary(((ListPreference)pref).getEntry());
             }
         }
     }

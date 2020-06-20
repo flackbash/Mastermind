@@ -9,4 +9,7 @@
 
     <string name="settings_number_colors_key" translatable="false">number_colors</string>
     <string name="settings_number_colors_default" translatable="false">6</string>
+
+    <string name="settings_number_rows_key" translatable="false">number_rows</string>
+    <string name="settings_number_rows_default" translatable="false">-1</string>
 </resources>
