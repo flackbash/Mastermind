@@ -1,6 +1,21 @@
 # Mastermind
 *Pretty Android version of the Mastermind code-breaking game*
 
+## How to Play
+Your goal is to guess a secret code that consists of a sequence of colored pegs.
+
+In each round you make a guess and place the pegs on the board accordingly.
+
+Once you made a guess, you get hints about how close you are to the real code:
+- each black hint peg indicates one of your guess pegs is correct in both color and position
+- each white hint peg indicates one of your guess pegs is correct in color but placed at the wrong position
+
+Try to guess the code using as few rows as possible.
+
+The game is lost if you use up all rows without guessing the correct code.
+
+## Screenshots
+
 <img src="https://github.com/flackbash/Mastermind/blob/master/metadata/android/en-US/phoneScreenshots/Game4-6.png" width="300" />
 
 ## License
