@@ -4,41 +4,25 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.DragEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.prangesoftwaresolutions.mastermind.R;
 import com.prangesoftwaresolutions.mastermind.interfaces.GameStatusEventListener;
 import com.prangesoftwaresolutions.mastermind.logic.Peg;
 import com.prangesoftwaresolutions.mastermind.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BoardRow extends RelativeLayout implements View.OnDragListener, View.OnTouchListener {
-
-    // List of slot ImageView pairs <backgroundIV, foregroundIV>
-    private List<Pair<ImageView, ImageView>> mSlotIVList = new ArrayList<>();
-
-    // Row number
-    private int mRowNumber;
-
+public class CodeRow extends Row implements View.OnDragListener, View.OnTouchListener {
     // Boolean indicating whether row is active
     private boolean mActive;
-
-    // Number of slots in the row
-    int mNumSlots = 4;
 
     // Pegs
     Peg mDraggedPeg;
@@ -47,100 +31,53 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
     // Listener for game status changes
     GameStatusEventListener mListener;
 
-    public BoardRow(Context context) {
+    public CodeRow(Context context) {
         super(context);
-        initializeViews(context, mNumSlots);
         mSlotArray = new Peg[mNumSlots];
     }
 
-    public BoardRow(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BoardRow);
-        mRowNumber = typedArray.getInt(R.styleable.BoardRow_row_number, 0);
-        mActive = typedArray.getBoolean(R.styleable.BoardRow_active, false);
-        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, mNumSlots);
-        typedArray.recycle();
-
+    public CodeRow(Context context, int numSlots, int rowNumber, Size size) {
+        super(context, numSlots, rowNumber, size);
         mSlotArray = new Peg[mNumSlots];
-
-        initializeViews(context, mNumSlots);
-
-    }
-
-    public BoardRow(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BoardRow);
-        mRowNumber = typedArray.getInt(R.styleable.BoardRow_row_number, 0);
-        mActive = typedArray.getBoolean(R.styleable.BoardRow_active, false);
-        mNumSlots = typedArray.getInt(R.styleable.BoardRow_slots, mNumSlots);
-        typedArray.recycle();
-
-        mSlotArray = new Peg[mNumSlots];
-
-        initializeViews(context, mNumSlots);
     }
 
     /**
      * Inflates the views in the layout.
      */
-    private void initializeViews(Context context, int numSlots) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        assert inflater != null;
-        int boardRowLayout;
-        switch (numSlots) {
-            case 3:
-                boardRowLayout = R.layout.board_row_3;
-                break;
-            case 4:
-                boardRowLayout = R.layout.board_row_4;
-                break;
-            case 5:
-                boardRowLayout = R.layout.board_row_5;
-                break;
-            case 6:
-                boardRowLayout = R.layout.board_row_6;
-                break;
-            default:
-                boardRowLayout = R.layout.board_row_4;
-                break;
-        }
-        inflater.inflate(boardRowLayout, this);
-    }
-
-    @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
+    @SuppressLint("SetTextI18n")
     @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-
-        // Set slot background
-        LinearLayout backgroundLL = findViewById(R.id.slots_background_ll);
-        LinearLayout foregroundLL = findViewById(R.id.slots_foreground_ll);
-        for (int i = 0; i < backgroundLL.getChildCount(); i++) {
-            // Set up background ImageView
-            ImageView backgroundIV = (ImageView) backgroundLL.getChildAt(i);
-            backgroundIV.setTag("slot_background_" + i);
-            backgroundIV.setOnDragListener(this);
-
-            // Set up foreground ImageView
-            ImageView foregroundIV = (ImageView) foregroundLL.getChildAt(i);
-            foregroundIV.setTag("slot_foreground_" + i);
-            foregroundIV.setOnTouchListener(this);
-
-            // Add both ImageViews to slot list
-            Pair<ImageView, ImageView> pair = new Pair<>(backgroundIV, foregroundIV);
-            mSlotIVList.add(pair);
-        }
+    protected void initializeViews(Context context, int numSlots, Size size) {
+        super.initializeViews(context, numSlots, size);
 
         // Highlight slot backgrounds if row is active
         if (mActive) {
             setBackgroundImages(true);
         }
+    }
 
-        // Row number
-        TextView mRowNumberTV = findViewById(R.id.row_number);
-        mRowNumberTV.setText(Integer.toString(mRowNumber));
+    /*
+     * Initialize ImageView for slot (background or foreground)
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    protected void initializeSlot(ImageView iv, int index, Row.Size size, boolean foreground) {
+        super.initializeSlot(iv, index, size, foreground);
+        if (foreground) {
+            iv.setOnTouchListener(this);
+        } else {
+            iv.setOnDragListener(this);
+        }
+    }
+
+    /*
+     * Reset board row.
+     */
+    @Override
+    public void reset() {
+        setActive(false);
+        mSlotArray = new Peg[mNumSlots];
+
+        super.reset();
     }
 
     /*
@@ -328,27 +265,6 @@ public class BoardRow extends RelativeLayout implements View.OnDragListener, Vie
             } else if (result.get(i) == 1) {
                 iv.setImageResource(R.drawable.peg_white);
             }
-        }
-    }
-
-    /*
-     * Reset board row.
-     */
-    public void reset() {
-        // Reset variables
-        setActive(false);
-        mSlotArray = new Peg[mNumSlots];
-
-        // Reset slot ImageViews
-        for (Pair<ImageView, ImageView> pair : mSlotIVList) {
-            pair.second.setImageDrawable(null);
-        }
-
-        // Reset hint ImageViews
-        GridLayout gl = findViewById(R.id.hints_foreground_gl);
-        for (int i = 0; i < gl.getChildCount(); i++) {
-            ImageView iv = (ImageView) gl.getChildAt(i);
-            iv.setImageDrawable(null);
         }
     }
 }
